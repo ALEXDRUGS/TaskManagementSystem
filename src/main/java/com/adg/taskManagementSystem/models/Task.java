@@ -29,4 +29,13 @@ public class Task {
     @Column(name = "priority")
     @Enumerated(EnumType.STRING)
     private Priority priority;
+
+    public Task(String title, String description, String author, String executor, Status status, Priority priority) {
+        this.title = title;
+        this.description = description;
+        this.author = author;
+        this.executor = executor;
+        this.status = status;
+        this.priority = priority;
+    }
 }
