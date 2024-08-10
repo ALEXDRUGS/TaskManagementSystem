@@ -10,9 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/task")
-public class Controller {
+public class TaskController {
     @Autowired
     private final TaskService taskService;
+
+    @GetMapping("/all")
+    public String getAllTasks() {
+        return taskService.getAll().toString();
+    }
     @GetMapping("/get")
     public String getTask(Long id) {
         return taskService.getTask(id).toString();

@@ -26,16 +26,13 @@ public class AuthenticationService {
      * @return токен
      */
     public JwtAuthenticationResponse signUp(SignUpRequest request) {
-
         var user = User.builder()
                 .username(request.getUsername())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.ROLE_USER)
                 .build();
-
         userService.createUser(user);
-
         var jwt = jwtService.generateToken(user);
         return new JwtAuthenticationResponse(jwt);
     }
@@ -51,11 +48,9 @@ public class AuthenticationService {
                 request.getUsername(),
                 request.getPassword()
         ));
-
         var user = userService
                 .userDetailsService()
                 .loadUserByUsername(request.getUsername());
-
         var jwt = jwtService.generateToken(user);
         return new JwtAuthenticationResponse(jwt);
     }
