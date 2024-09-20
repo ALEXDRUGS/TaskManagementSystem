@@ -5,20 +5,22 @@ import com.adg.taskManagementSystem.dto.UpdateTaskRequest;
 import com.adg.taskManagementSystem.models.Task;
 import com.adg.taskManagementSystem.repositories.TaskRepository;
 import com.adg.taskManagementSystem.utils.MappingUtils;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class TaskService {
-    @Autowired
     private final TaskRepository taskRepository;
     private final UserService userService;
     private final MappingUtils mappingUtils;
+
+    public TaskService(TaskRepository taskRepository, UserService userService, MappingUtils mappingUtils) {
+        this.taskRepository = taskRepository;
+        this.userService = userService;
+        this.mappingUtils = mappingUtils;
+    }
 
     public Optional<Task> getTask(Long id) {
         return taskRepository.findById(id);

@@ -22,12 +22,16 @@ public class User implements UserDetails {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Getter
     @Column(name = "username", unique = true, nullable = false)
     private String username;
+    @Getter
     @Column(name = "password", nullable = false)
     private String password;
+    @Getter
     @Column(name = "email", unique = true, nullable = false)
     private String email;
+    @Getter
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private Role role;
@@ -37,19 +41,23 @@ public class User implements UserDetails {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
-    public String getPassword() {
-        return password;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public String getUsername() {
-        return username;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
-    public String getEmail() {
-        return email;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    public Role getRole() {
-        return role;
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

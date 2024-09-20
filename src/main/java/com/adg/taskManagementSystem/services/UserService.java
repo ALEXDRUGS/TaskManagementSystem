@@ -3,18 +3,18 @@ package com.adg.taskManagementSystem.services;
 import com.adg.taskManagementSystem.models.User;
 import com.adg.taskManagementSystem.models.enums.Role;
 import com.adg.taskManagementSystem.repositories.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class UserService {
-    @Autowired
     private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     /**
      * Сохранение пользователя

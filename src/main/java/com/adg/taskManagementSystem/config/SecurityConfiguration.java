@@ -2,7 +2,6 @@ package com.adg.taskManagementSystem.config;
 
 import com.adg.taskManagementSystem.filters.JwtAuthenticationFilter;
 import com.adg.taskManagementSystem.services.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,10 +25,14 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-@RequiredArgsConstructor
 public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserService userService;
+
+    public SecurityConfiguration(JwtAuthenticationFilter jwtAuthenticationFilter, UserService userService) {
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.userService = userService;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
